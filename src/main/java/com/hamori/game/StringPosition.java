@@ -44,4 +44,6 @@ public class StringPosition implements Position {
 
         throw new InvalidParameterException(status + " character is not accepted");
     }
+
+
 }

@@ -85,9 +85,17 @@ public class FieldEvaluator {
      * @param position
      * @return number of EMPTY cells
      */
-    public long numberOfFreeCells(Position position) {
+    public long numberOfCells(Position position, FieldStatus status) {
         return Arrays.asList(Field.values()).stream().
-                filter(field -> position.getFieldStatus(field) == FieldStatus.EMPTY).count();
+                filter(field -> position.getFieldStatus(field) == status).count();
 
     }
+
+
+    public void validatePosition(Position position) {
+        if (isWinSituation(position) || numberOfCells(position, FieldStatus.EMPTY) == 0) {
+            throw new IllegalStateException();
+        }
+    }
+
 }

@@ -20,7 +20,7 @@ public class PlayerTest {
     private Player player;
 
     @Test
-    public void discoverWinningMove() {
+    public void discoverVerticalWinningMove() {
         Position position = new StringPosition(
                 "_XO" +
                         "_X_" +
@@ -28,6 +28,53 @@ public class PlayerTest {
 
         Field field = player.move(position);
         assertThat(field, is(Field.BOTTOM_CENTRE));
+    }
+
+
+    @Test
+    public void discoverHorizontalWinningMove() {
+        Position position = new StringPosition(
+                "__O" +
+                        "XX_" +
+                        "O__");
+
+        Field field = player.move(position);
+        assertThat(field, is(Field.CENTRE_RIGHT));
+    }
+
+
+    @Test
+    public void discoverDiagonalWinningMove1() {
+        Position position = new StringPosition(
+                "OO_" +
+                        "_X_" +
+                        "X__");
+
+        Field field = player.move(position);
+        assertThat(field, is(Field.TOP_RIGHT));
+    }
+
+
+    @Test
+    public void discoverDiagonalWinningMove2() {
+        Position position = new StringPosition(
+                "XOO" +
+                        "_X_" +
+                        "___");
+
+        Field field = player.move(position);
+        assertThat(field, is(Field.BOTTOM_RIGHT));
+    }
+
+    @Test
+    public void canAvoidHorizontalOpponentWin() {
+        Position position = new StringPosition(
+                "OO_" +
+                        "X__" +
+                        "X__");
+
+        Field field = player.move(position);
+        assertThat(field, is(Field.TOP_RIGHT));
     }
 
     @Test
@@ -40,6 +87,40 @@ public class PlayerTest {
         Field field = player.move(position);
         assertThat(field, is(Field.CENTRE_CENTRE));
     }
+
+    @Test
+    public void canAvoidVerticalOpponentWin() {
+        Position position = new StringPosition(
+                "OXX" +
+                        "___" +
+                        "O__");
+        Field field = player.move(position);
+        assertThat(field, is(Field.CENTRE_LEFT));
+    }
+
+    @Test
+    public void canAvoidDiagonalOpponentWin1() {
+        Position position = new StringPosition(
+                "O__" +
+                        "XO_" +
+                        "X__");
+
+        Field field = player.move(position);
+        assertThat(field, is(Field.BOTTOM_RIGHT));
+    }
+
+    @Test
+    public void canAvoidDiagonalOpponentWin2() {
+        Position position = new StringPosition(
+                "__O" +
+                        "_OX" +
+                        "__X");
+
+        Field field = player.move(position);
+        assertThat(field, is(Field.BOTTOM_LEFT));
+    }
+
+
 
     @Test
     public void canDiscoverCentralWinning() {
