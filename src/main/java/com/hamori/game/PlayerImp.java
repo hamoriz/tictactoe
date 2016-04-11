@@ -15,6 +15,10 @@ import java.util.stream.Collectors;
 @Component
 public class PlayerImp implements Player {
 
+    private static final long SCORE_WINNING = 1L;
+    private static final long SCORE_LOSING = 4L;
+    private static final long SCORE_NEUTRAL = 3L;
+
     @Autowired
     private FieldEvaluator evaluator;
 
@@ -41,7 +45,7 @@ public class PlayerImp implements Player {
         for (Field field : possibleSteps) {
             Position nextPosition = positionHandler.step(position, field);
             if (evaluator.isWinSituation(nextPosition)) {
-                fieldValues.put(field, 1L);
+                fieldValues.put(field, SCORE_WINNING);
                 return fieldValues;
             }
         }
@@ -51,13 +55,13 @@ public class PlayerImp implements Player {
 
           if (evaluator.numberOfCells(nextPosition, FieldStatus.EMPTY) != 0) {
               Map.Entry<Field, Long> opponentBestStepValue =  getMaxValueStep(evaluateSteps(nextPosition));
-              if (opponentBestStepValue.getValue()==1L) {
-                  fieldValues.put(field, 4L);
+              if (opponentBestStepValue.getValue()==SCORE_WINNING) {
+                  fieldValues.put(field, SCORE_LOSING);
               } else {
-                  fieldValues.put(field, 3L);
+                  fieldValues.put(field, SCORE_NEUTRAL);
               }
             } else {
-                fieldValues.put(field, 3L);
+                fieldValues.put(field, SCORE_NEUTRAL);
             }
         }
 
