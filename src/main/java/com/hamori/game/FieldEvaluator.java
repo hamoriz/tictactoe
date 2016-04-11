@@ -6,10 +6,7 @@ package com.hamori.game;
 
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Utility class to provide functions used generally
@@ -61,7 +58,6 @@ public class FieldEvaluator {
     }};
 
 
-
     /**
      * Checks whether the position represents a winning situation
      *
@@ -89,13 +85,9 @@ public class FieldEvaluator {
      * @param position
      * @return number of EMPTY cells
      */
-    public int numberOfFreeCells(Position position) {
-        int empty = 0;
-        for (Field field : Field.values()) {
-            if (position.getFieldStatus(field) == FieldStatus.EMPTY) {
-                empty++;
-            }
-        }
-        return empty;
+    public long numberOfFreeCells(Position position) {
+        return Arrays.asList(Field.values()).stream().
+                filter(field -> position.getFieldStatus(field) == FieldStatus.EMPTY).count();
+
     }
 }
