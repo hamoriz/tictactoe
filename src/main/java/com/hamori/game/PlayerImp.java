@@ -38,6 +38,12 @@ public class PlayerImp implements Player {
         return fieldLongMap.entrySet().stream().max((e1, e2) -> e1.getValue().compareTo(e2.getValue())).get();
     }
 
+    /**
+     * TODO Refactoring!!!!!!!!!!!
+     * @param position
+     * @param depth
+     * @return
+     */
     private Map<Field, Score> evaluateSteps(Position position, Long depth) {
         List<Field> possibleSteps = getPossibleSteps(position);
 
