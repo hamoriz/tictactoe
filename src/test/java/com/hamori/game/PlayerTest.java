@@ -111,7 +111,7 @@ public class PlayerTest {
     @Test
     public void canAvoidDiagonalOpponentWin1() {
         Position position = new StringPosition(
-                "O__" +
+                        "O__" +
                         "XO_" +
                         "X__");
 
@@ -148,8 +148,8 @@ public class PlayerTest {
     @Test
     public void canDiscoverCorner() {
         Position position = new StringPosition(
-                        "_O_" +
-                        "O_X" +
+                        "___" +
+                        "OOX" +
                         "X__");
 
         Field field = player.move(position);
