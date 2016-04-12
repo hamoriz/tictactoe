@@ -35,10 +35,12 @@ public class PositionHandlerTest {
         assertThat(positionToString(position), is("O_____X__"));
     }
 
+
     @Test(expected = InvalidParameterException.class)
     public void stepTopLeft2TimesToNonEmpty() {
         positionHandler.step(new StringPosition("______X__"), Field.BOTTOM_LEFT);
     }
+
 
 
     private String positionToString(Position position) {

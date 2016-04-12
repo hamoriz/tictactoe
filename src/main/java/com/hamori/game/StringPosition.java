@@ -18,6 +18,10 @@ public class StringPosition implements Position {
 
     @Override
     public FieldStatus getFieldStatus(Field field) {
+        if (field==null) {
+            throw new NullPointerException();
+        }
+
         return fields.get(field);
     }
 
@@ -37,12 +41,9 @@ public class StringPosition implements Position {
                 return FieldStatus.O;
             case 'X':
                 return FieldStatus.X;
-            case '_':
-                return FieldStatus.EMPTY;
-
         }
 
-        throw new InvalidParameterException(status + " character is not accepted");
+        return FieldStatus.EMPTY;
     }
 
 

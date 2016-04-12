@@ -66,4 +66,10 @@ public class PositionTest {
         assertThat(position.getFieldStatus(Field.BOTTOM_RIGHT), is(FieldStatus.EMPTY));
     }
 
+    @Test(expected = NullPointerException.class)
+    public void stepNull() {
+        Position position =(new StringPosition("______X__"));
+        position.getFieldStatus(null);
+    }
+
 }
