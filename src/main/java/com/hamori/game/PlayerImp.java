@@ -57,6 +57,8 @@ public class PlayerImp implements Player {
               Map.Entry<Field, Long> opponentBestStepValue =  getMaxValueStep(evaluateSteps(nextPosition));
               if (opponentBestStepValue.getValue()==SCORE_WINNING) {
                   fieldValues.put(field, SCORE_LOSING);
+              } else if (opponentBestStepValue.getValue()==SCORE_LOSING) {
+                  fieldValues.put(field, SCORE_WINNING);
               } else {
                   fieldValues.put(field, SCORE_NEUTRAL);
               }

@@ -69,7 +69,7 @@ public class PlayerTest {
     @Test
     public void canAvoidHorizontalOpponentWin() {
         Position position = new StringPosition(
-                "OO_" +
+                        "OO_" +
                         "X__" +
                         "X__");
 
@@ -91,9 +91,19 @@ public class PlayerTest {
     @Test
     public void canAvoidVerticalOpponentWin() {
         Position position = new StringPosition(
-                "OXX" +
+                        "OXX" +
                         "___" +
                         "O__");
+        Field field = player.move(position);
+        assertThat(field, is(Field.CENTRE_LEFT));
+    }
+
+    @Test
+    public void canAvoidVerticalOpponentWin2() {
+        Position position = new StringPosition(
+                        "OXX" +
+                        "__O" +
+                        "O_X");
         Field field = player.move(position);
         assertThat(field, is(Field.CENTRE_LEFT));
     }
@@ -108,6 +118,8 @@ public class PlayerTest {
         Field field = player.move(position);
         assertThat(field, is(Field.BOTTOM_RIGHT));
     }
+
+
 
     @Test
     public void canAvoidDiagonalOpponentWin2() {
@@ -136,12 +148,12 @@ public class PlayerTest {
     @Test
     public void canDiscoverCorner() {
         Position position = new StringPosition(
-                "_O_" +
+                        "_O_" +
                         "O_X" +
                         "X__");
 
         Field field = player.move(position);
-        assertThat(field, is(Field.TOP_RIGHT));
+        assertThat(field, is(Field.BOTTOM_RIGHT));
     }
 
     @Test(expected = IllegalStateException.class)
